@@ -1,4 +1,6 @@
-#
+-- Active: 1769823356550@@127.0.0.1@3306@school_db
+-- Active: 1769823356550@@127.0.0.1@3306
+    #
 # Converted from MS Access 2010 Northwind database (northwind.accdb) using
 # Bullzip MS Access to MySQL Version 5.1.242. http://www.bullzip.com
 #
