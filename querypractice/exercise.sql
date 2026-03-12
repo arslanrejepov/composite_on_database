@@ -123,3 +123,20 @@ from enrollments;
 SELECT name, age
 from students
 where age<20 
+
+--22 
+
+select s.name as students, count(e.course_id) as number_of_courses
+from students s 
+join enrollments e
+on s.student_id = e.student_id
+group by s.student_id, s.name  
+
+
+--23
+select c.course_name, count(e.student_id) as number_of_students
+from courses c
+join enrollments e
+on c.course_id = e. course_id
+GROUP BY c.course_id, c.course_name
+HAVING count(e.student_id)>1;
