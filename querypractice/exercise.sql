@@ -85,3 +85,41 @@ SELECT name, gpa
 from students
 order BY gpa desc
 limit 1;
+
+
+--16  Show all students who study Mathematics.
+
+select *
+from students;
+
+select name, major
+from students
+where major = "Mathematics";
+
+--17
+SELECT name, gpa 
+from students
+where gpa > 3.5 and gpa <4.0
+
+--18 
+select major
+from students
+GROUP BY (major);
+
+--19
+SELECT course_id, course_name, credits
+from courses
+order BY (credits) DESC;
+
+--20 
+
+select *
+from enrollments;
+
+SELECT count(enrollment_id) as number_of_enrolments
+from enrollments;
+
+--21
+SELECT name, age
+from students
+where age<20 
