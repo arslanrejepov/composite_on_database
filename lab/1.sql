@@ -1,4 +1,4 @@
--- Active: 1769823356550@@127.0.0.1@3306
+-- Active: 1769830323903@@127.0.0.1@3306@db_uni047
 -- Active: 1769823356550@@127.0.0.1@3306
 CREATE DATABASE Db_uni047
 CHARACTER SET utf8mb4
@@ -61,4 +61,81 @@ CREATE TABLE Reports047 (
         REFERENCES Courses047(Cno047)
 ) ENGINE=InnoDB;
 
+
 SHOW TABLES;
+
+-- 1. Add new column Ssex
+ALTER TABLE Students047
+ADD COLUMN Ssex047 VARCHAR(3);
+
+-- 2. Remove CHECK constraint on Scredit (may not work depending on MySQL version)
+ALTER TABLE Students047
+DROP CHECK CK_Stu_Scredit047;
+
+-- 3. Modify column lengths to 30
+ALTER TABLE Students047
+MODIFY Sname047 VARCHAR(30);
+
+ALTER TABLE Teachers047
+MODIFY Tname047 VARCHAR(30);
+
+ALTER TABLE Courses047
+MODIFY Cname047 VARCHAR(30);
+
+DESCRIBE Students047;
+DESCRIBE Teachers047;
+DESCRIBE Courses047;
+ALTER TABLE Students047
+DROP COLUMN Sroom047;
+
+DESCRIBE Students047;
+
+DROP TABLE IF EXISTS Reports047;
+
+CREATE TABLE Reports047 (
+    Sno047 VARCHAR(6),
+    Tno047 VARCHAR(6),
+    Cno047 VARCHAR(6),
+    Score047 DECIMAL(5,1),
+
+    CONSTRAINT PK_Rep047 PRIMARY KEY (Sno047, Tno047, Cno047),
+
+    CONSTRAINT FK_Stu_Rep047 FOREIGN KEY (Sno047)
+        REFERENCES Students047(Sno047),
+
+    CONSTRAINT FK_Tea_Rep047 FOREIGN KEY (Tno047)
+        REFERENCES Teachers047(Tno047),
+
+    CONSTRAINT FK_Cou_Rep047 FOREIGN KEY (Cno047)
+        REFERENCES Courses047(Cno047)
+) ENGINE=InnoDB;
+
+SHOW CREATE TABLE Reports047;
+
+CREATE INDEX idx_Cno047_desc
+ON Courses047 (Cno047 DESC);
+
+SHOW INDEX FROM Courses047;
+USE Db_Uni047;
+
+SHOW INDEX FROM Courses047;
+
+CREATE INDEX idx_Sno047_asc
+ON Students047 (Sno047 ASC);
+
+SHOW INDEX FROM Students047;
+
+
+CREATE UNIQUE INDEX idx_Sname047_unique
+ON Students047 (Sname047 ASC);
+
+SHOW INDEX FROM Students047;
+
+-- Drop index on Students (Sno047)
+DROP INDEX idx_Sno047_asc ON Students047;
+
+-- Drop index on Courses (Cno047)
+DROP INDEX idx_Cno047_desc ON Courses047;
+
+SHOW INDEX FROM Students047;
+SHOW INDEX FROM Courses047;
