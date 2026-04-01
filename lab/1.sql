@@ -1,0 +1,64 @@
+-- Active: 1769823356550@@127.0.0.1@3306
+-- Active: 1769823356550@@127.0.0.1@3306
+CREATE DATABASE Db_uni047
+CHARACTER SET utf8mb4
+COLLATE utf8mb4_unicode_ci;
+
+
+SHOW DATABASES;
+
+
+USE Db_Uni047;
+SELECT DATABASE();
+
+-- Students table
+CREATE TABLE Students047 (
+    Sno047 VARCHAR(6),
+    Sname047 VARCHAR(20) NOT NULL,
+    Semail047 VARCHAR(50),
+    Scredit047 DECIMAL(5,1),
+    Sroom047 VARCHAR(5),
+    CONSTRAINT PK_Stu047 PRIMARY KEY (Sno047),
+    CONSTRAINT CK_Stu_Scredit047 CHECK (Scredit047 >= 0)
+) ENGINE=InnoDB;
+
+
+-- Teachers table
+CREATE TABLE Teachers047 (
+    Tno047 VARCHAR(6),
+    Tname047 VARCHAR(20) NOT NULL,
+    Temail047 VARCHAR(50),
+    Tsalary047 DECIMAL(5,1),
+    CONSTRAINT PK_Tea047 PRIMARY KEY (Tno047)
+) ENGINE=InnoDB;
+
+
+-- Courses table
+CREATE TABLE Courses047 (
+    Cno047 VARCHAR(6),
+    Cname047 VARCHAR(20) NOT NULL,
+    Ccredit047 DECIMAL(5,1),
+    CONSTRAINT PK_Cou047 PRIMARY KEY (Cno047)
+) ENGINE=InnoDB;
+
+
+-- Reports table (create LAST)
+CREATE TABLE Reports047 (
+    Sno047 VARCHAR(6),
+    Tno047 VARCHAR(6),
+    Cno047 VARCHAR(6),
+    Score047 DECIMAL(5,1),
+
+    CONSTRAINT PK_Rep047 PRIMARY KEY (Sno047, Tno047, Cno047),
+
+    CONSTRAINT FK_Stu_Rep047 FOREIGN KEY (Sno047)
+        REFERENCES Students047(Sno047),
+
+    CONSTRAINT FK_Tea_Rep047 FOREIGN KEY (Tno047)
+        REFERENCES Teachers047(Tno047),
+
+    CONSTRAINT FK_Cou_Rep047 FOREIGN KEY (Cno047)
+        REFERENCES Courses047(Cno047)
+) ENGINE=InnoDB;
+
+SHOW TABLES;
