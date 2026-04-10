@@ -139,3 +139,82 @@ DROP INDEX idx_Cno047_desc ON Courses047;
 
 SHOW INDEX FROM Students047;
 SHOW INDEX FROM Courses047;
+
+
+ALTER TABLE students047
+Modify Ssex047 VARCHAR(10);
+INSERT INTO students047
+VALUES ('S01','Wang Jianping','WJP@zjut.edu.cn', 23.1,'Male'),
+       ('S02','Liu Hua','LH@zjut.edu.cn', 24.6,'Female'),
+       ('S03','Fan Linjun','FLJ@zjut.edu.cn', 16.6,'Female'),
+       ('S04','Li Wei','LW@zjut.edu.cn', 15.8,'Male'),
+       ('S26','Huang He','HUanghe@zjut.edu.cn', 13.4,'Male'),
+       ('S52','Chang Jiang','Changjiang@zjut.edu.cn', 12.4,'Male');
+
+INSERT INTO teachers047
+VALUES ('T01','Liu Tao','LT@zjut.edu.cn', 4300),
+       ('T02','Wu Biyan','WBY@zjut.edu.cn', 2500),
+       ('T03','Zhang Ying','ZY@zjut.edu.cn', 3000),
+       ('T04','Zhang Ningya','ZNY@zjut.edu.cn', 5500),
+       ('T05','Ye Shuai','YS@zjut.edu.cn', 3800),
+       ('T06','Yang Guangmei','YGM@zjut.edu.cn', 3500),
+       ('T07','Cheng Qian','CQ@zjut.edu.cn', 5000);
+
+
+ALTER table courses047
+MODIFY Cname047 VARCHAR(50);
+
+INSERT INTO courses047
+VALUES ('C01','C++',4),
+       ('C02','UML',4),
+       ('C03','JAVA',3),
+       ('C04','Algorithm Analysis and Design',3),
+       ('C05','Database Principles and Applications',3),
+       ('C06','Data Structures and Algorithms',4),
+       ('C07','Computer Organization Principles',4),
+       ('C08','English',6),
+       ('C09','Digital Life',2),
+       ('C10','Music Appreciation',2),
+       ('C11','Physical Education 1',2);
+      
+
+INSERT INTO Reports047
+VALUES ('S01','T01','C01',83),
+       ('S01','T03','C03',85),
+       ('S02','T01','C01',75),
+       ('S02','T02','C02',45),
+       ('S02','T03','C03',NULL),
+       ('S02','T04','C04',NULL),
+       ('S02','T05','C05',70),
+       ('S02','T04','C06',83),
+       ('S02','T05','C07',90),
+       ('S02','T01','C08',83),
+       ('S02','T02','C09',77),
+       ('S02','T07','C10',83),
+       ('S02','T06','C11',88),
+       ('S03','T01','C08',63),
+       ('S03','T02','C02',93),
+       ('S03','T01','C01',78),
+       ('S04','T06','C06',89),
+       ('S04','T05','C05',93),
+       ('S26','T07','C10',45),
+       ('S26','T04','C04',86),
+       ('S52','T07','C10',91),
+       ('S52','T06','C11',90),
+       ('S52','T05','C05',NULL),
+       ('S52','T01','C08',64),
+       ('S52','T02','C09',81);
+
+
+SELECT Sname047
+from students047
+where Ssex047 = "Male"
+ORDER BY Sno047 ASC; 
+
+SELECT r.Sno047, c.Cno047,
+CASE 
+    WHEN `Score047` >= 60  THEN  (1 + (`Score047` - 60) * 0.1) * C.Ccredit047
+    ELSE  0
+END as Credit
+From reports047 r
+JOIN courses047 c ON r.`Cno047` = c.`Cno047`;
