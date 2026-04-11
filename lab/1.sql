@@ -218,3 +218,22 @@ CASE
 END as Credit
 From reports047 r
 JOIN courses047 c ON r.`Cno047` = c.`Cno047`;
+
+SELECT Cname047
+FROM courses047
+where `Ccredit047` IN (3,4);
+
+
+SELECT `Cno047`
+from courses047
+where `Cname047` like "%Algorithm%";
+SELECT DISTINCT cno047
+from reports047; 
+
+SELECT AVG(Tsalary047) as AvgSalary
+from teachers047;
+
+SELECT Tno, Avg(Score) as AvgScore
+FROM reports047
+GROUP BY `Tno047`
+ORDER BY 
