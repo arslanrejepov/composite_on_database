@@ -237,3 +237,134 @@ SELECT Tno, Avg(Score) as AvgScore
 FROM reports047
 GROUP BY `Tno047`
 ORDER BY 
+
+SELECT Cno047,
+       COUNT(DISTINCT Sno047) AS StudentCount,
+       AVG(Score047) AS AvgScore
+FROM reports047
+GROUP BY Cno047;
+
+SELECT s.Sno047, s.Sname047
+from students047 s
+join reports047 r ON s.`Sno047` = r.`Sno047`
+GROUP BY s.`Sno047`, s.Sname047 
+having count(DISTINCT r.`Cno047`) >=3;
+
+SELECT c.Cname047, r.Score047
+from reports047 r
+JOIN courses047 c On r.Cno047 = c.Cno047
+where r.Sno047 = "S26";
+
+SELECT DISTINCT s.Sno047, s.Sname047
+FROM students047 s
+JOIN reports047 r ON s.Sno047 = r.Sno047
+JOIN courses047 c ON r.Cno047 = c.Cno047
+WHERE c.Cname047 = 'Database Principles and Applications';
+
+
+SELECT A.Sno047, B.Sno047, A.Cno047
+FROM reports047 A
+JOIN reports047 B 
+ON A.Cno047 = B.Cno047 AND A.Sno047 < B.Sno047;
+
+SELECT DISTINCT Sno047
+FROM reports047
+WHERE Cno047 IN (
+    SELECT Cno047
+    FROM reports047
+    WHERE Sno047 = 'S26'
+);
+
+SELECT s.*, r.Cno047, r.Score047
+FROM students047 s
+LEFT JOIN reports047 r ON s.Sno047 = r.Sno047;
+
+SELECT s.Sname047, c.Cname047, r.Score047
+FROM students047 s
+JOIN reports047 r ON s.Sno047 = r.Sno047
+JOIN courses047 c ON r.Cno047 = c.Cno047
+WHERE s.Sno047 = 'S52';
+
+SELECT *
+FROM students047
+WHERE `Ssex047` = (
+    SELECT `Ssex047`
+    FROM students047
+    WHERE Sno047 = 'S52'
+);
+
+SELECT DISTINCT s.*
+FROM students047 s
+JOIN reports047 r ON s.Sno047 = r.Sno047;
+
+SELECT c.Cno047, c.Cname047
+FROM courses047 c
+LEFT JOIN reports047 r ON c.Cno047 = r.Cno047
+WHERE r.Cno047 IS NULL;
+
+SELECT s.Sno047, s.Sname047
+FROM students047 s
+JOIN reports047 r ON s.Sno047 = r.Sno047
+WHERE r.Cno047 = 'C01';
+
+SELECT DISTINCT s.Sno047, s.Sname047
+FROM students047 s
+JOIN reports047 r ON s.Sno047 = r.Sno047
+WHERE r.Cno047 IN ('C01','C02');
+
+SELECT Cname047
+FROM courses047
+WHERE Ccredit047 IN (
+    SELECT Ccredit047
+    FROM courses047
+    WHERE Cname047 IN ('UML','C++')
+);
+
+SELECT s.Sname047
+FROM students047 s
+JOIN reports047 r ON s.Sno047 = r.Sno047
+WHERE r.Cno047 = 'C01';
+
+
+SELECT s.Sname047
+FROM students047 s
+WHERE NOT EXISTS (
+    SELECT *
+    FROM courses047 c
+    WHERE NOT EXISTS (
+        SELECT *
+        FROM reports047 r
+        WHERE r.Sno047 = s.Sno047 
+          AND r.Cno047 = c.Cno047
+    )
+);
+
+SELECT s.Sno047, s.Sname047
+FROM students047 s
+JOIN reports047 r ON s.Sno047 = r.Sno047
+WHERE r.Cno047 = 'C01'
+
+UNION
+
+SELECT s.Sno047, s.Sname047
+FROM students047 s
+JOIN reports047 r ON s.Sno047 = r.Sno047
+WHERE r.Cno047 = 'C03';
+
+SELECT DISTINCT Sno047
+FROM reports047
+WHERE Cno047 = 'C01'
+AND Sno047 NOT IN (
+    SELECT Sno047
+    FROM reports047
+    WHERE Cno047 = 'C03'
+);
+
+SELECT s.Sno047, s.Sname047
+FROM students047 s
+WHERE s.Sno047 IN (
+    SELECT Sno047 FROM reports047 WHERE Cno047 = 'C01'
+)
+AND s.Sno047 IN (
+    SELECT Sno047 FROM reports047 WHERE Cno047 = 'C03'
+);
