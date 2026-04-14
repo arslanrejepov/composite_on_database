@@ -368,3 +368,51 @@ WHERE s.Sno047 IN (
 AND s.Sno047 IN (
     SELECT Sno047 FROM reports047 WHERE Cno047 = 'C03'
 );
+
+
+INSERT into students047 (Sno047, Sname047, Semail047, Scredit047, Ssex047)
+VALUES ('S78', 'Li Di', 'LD@zjut.edu.cn', 0, 'Male');
+
+CREATE TABLE CourseStats047 (
+    Cno047 VARCHAR(6),
+    StudentCount INT,
+    AvgScore DECIMAL(5,2)
+);
+
+INSERT INTO CourseStats047 (Cno047, StudentCount, AvgScore)
+SELECT Cno047,
+       COUNT(Score047),   -- counts only non-null scores
+       AVG(Score047)
+FROM reports047
+GROUP BY Cno047;
+
+UPDATE students047
+SET Sno047 = 'S70'
+WHERE Sname047 = 'Li Di';
+
+
+UPDATE teachers047
+SET `Tsalary047` = `Tsalary047` + 500;
+
+UPDATE reports047 
+SET `Score047` = `Score047` + 6
+where `Sno047` = (
+    SELECT `Sno047` FROM students047 where `Sname047` = "Liu Hua"
+)
+And `Cno047` = (
+    SELECT `Cno047` FROM courses047
+    where Cname047 = 'Principles and Applications of Database'
+);
+
+DELETE from students047
+where Sname047 = "Li Di";
+
+DELETE from reports047
+Where Cno047 = (
+    SELECT `Cno047` from courses047 where `Cname047` = "JAVA"
+);
+
+DELETE FROM reports047
+WHERE Cno047 IN (
+    SELECT Cno047 FROM courses047 WHERE Ccredit047 <= 4
+);
