@@ -77,8 +77,9 @@ Usage Guide
 1.	Products — Browse/search products. Click a row to auto-fill the edit form; update price/discount/status or delete. Use the top form to add a new product (also creates its inventory row).
  
 2.	Inventory — View stock levels. "Show Low Stock Only" filters items below reorder level. Click a row to auto-fill the update form, then adjust stock quantity / reorder level and save.
- 
 click Show Low Stock Only  to display products with the less count then using functions below we can update the Quantity
+
+
 3.	Customers — Browse/search customers. Click a row to edit phone/membership or delete. Use the top form to add a new customer.
 
 4.	Orders — View all orders with customer names. Enter an Order ID and pick a new status to update it (marking "Completed" auto-awards loyalty points via trigger).
