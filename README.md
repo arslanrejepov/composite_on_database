@@ -61,12 +61,15 @@ Displays the full product catalog joined with category name and live stock quant
 3. Inventory Tab
 Lists current stock levels and reorder thresholds for every product. A "Show Low Stock Only" button filters to items where stock_quantity is below reorder_level, giving the Inventory Clerk an at-a-glance view of what needs restocking. This tab is directly linked to the low-stock warning trigger: whenever an order reduces a product's stock below its threshold, the resulting warning is visible here.
 Login:
-|_______________________________|
+
+```
+________________________________
 |Username     |	Password      |
 |manager1	  |   manager123    |
 |cashier1	  |   cashier123    |
 |inventory1   |	inventory123  |
 |———————————————————————————————|
+```
 
  
 Insert information then click Login.
